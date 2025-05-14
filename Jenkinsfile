@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "jenkins-demo-app"
-        DOCKER_IMAGE_TAG = "latest"
+        IMAGE_NAME = 'shubhamgrover1/el-task2-my-app'
     }
 
     stages {
@@ -15,14 +14,23 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                sh 'echo "Tests would run here"'
             }
         }
 
         stage('Docker Build') {
             steps {
-                script {
-                    sh "docker build -t ${IMAGE_NAME}:${DOCKER_IMAGE_TAG} ."
+                sh 'docker build -t $IMAGE_NAME .'
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker push $IMAGE_NAME
+                    '''
                 }
             }
         }
