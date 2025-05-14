@@ -7,12 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/shubhamgrover1/EL_Task2_my-app.git'
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
@@ -34,4 +28,3 @@ pipeline {
         }
     }
 }
-
