@@ -1,6 +1,6 @@
 # EL_Task2_my-app
 
-This is a simple Node.js app for demonstrating CI/CD using Jenkins and Docker.
+This is a simple Node.js app for demonstrating CI/CD using Jenkins and Docker..
 
 ## Task Objective
 
